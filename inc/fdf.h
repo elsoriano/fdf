@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:51:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/10/28 20:11:09 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/10/30 19:18:24 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-typedef struct s_point
+typedef struct s_data
 {
-	int	x;
-	int	y;
-	int	x3;
-	int	y3;
-	int	z3;
+	int	cols;
+	int	rows;
+	int	**pts;
 }
-    t_point;
+    t_data;
 
 
 #endif

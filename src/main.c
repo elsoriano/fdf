@@ -6,62 +6,93 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/10/29 00:25:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/10/30 20:13:23 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void	ft_cnvrt_line(int row, char *buff, t_point **pt)
+void	ft_clean_exit(t_data *data, char *msg)
 {
-	int col;
-
-	col = 1;
-	while (buff[col] && buff[col] != '\n')
+	if (data)
 	{
-		pt->x3 = col;
-		col++;
+		if (data->pts)
+		{
+			while (data->pts[i])
+				free(data->pts[i++]);
+			free(data->pts);
+		}
 	}
-}
-
-void	ft_rd_map(int fd, t_point **pt)
-{
-	int		rd;
-	char	*buff;
-	int		row;
-
-	row = 1;
-	buff = ft_strdup("\0");
-	while (*buff)
+	if (msg)
 	{
-		buff = ft_get_next_line(fd);
-		ft_cnvrt_line(row, buff, pt);
-		row++;
-	}
-}
-
-int	ft_open_map(char *map)
-{
-	int		fd;
-
-	fd = open(map, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(strerror(errno));
+		perror(msg);
 		exit(EXIT_FAILURE);
 	}
-	return (fd);
+	exit(EXIT_SUCCESS);
+}
+
+void	ft_count_cols(char *buff, t_data *data)
+{
+	char		**split;
+	static int	cols = -1;
+	int			i;
+
+	i = 0;
+	split = ft_split(buff);
+	if (!split)
+	{
+		free(buff);
+		ft_clean_exit(data, "Error reading rows");
+	}
+	while (split[i])
+		i++;
+	if (cols != i && cols != -1)
+	{
+		while (split[i])
+			free(split[i++]);
+		free(split);
+		ft_clean_exit(data, "Lines have different sizes");
+	}
+	data->cols = i;
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
+void	ft_map_size(char *map, t_data *data)
+{
+	int		fd;
+	char	*buff;
+	char	**split;
+	int		cols;
+
+	cols = 0;
+	data->rows = 0;
+	fd = open(map, O_RDONLY, 0);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
+	while (1 == 1)
+	{
+		buff = ft_get_next_line(fd);
+		if(!buff)
+			break;
+		ft_count_cols(buff, data);
+		free(buff);
+		data->rows++;
+	}
+	close(fd);
 }
 
 int	main(int argc, char **argv)
 {
-	t_point		**pt;
-	int			fd;
+	t_data		*data;
 
-	pt = NULL;
+	data = (t_data *)malloc(sizeof(t_data *));
 	if (argc != 2)
 		return (errno = EINVAL, perror("Invalid Number of Arguments"), 1);
-	fd = ft_open_map(argv[1]);
-	ft_rd_map(fd, pt);
+	ft_map_size(argv[1], data);
+	ft_set_matrix(argv[1], data);
+	ft_clean_exit(data, NULL);
 	return (0);
 }
