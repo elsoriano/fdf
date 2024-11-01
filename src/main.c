@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/01 13:59:44 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:28:42 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_put_nb(char *line, int row, t_data *data)
 		ft_clean_exit(data, "Error spliting line");
 	while(split[i])
 	{
-		data->pts[row][i] = ft_atoi(split[0]);
+		data->pts[row][i] = ft_atoi(split[i]);
 		i++;
 	}
 	i = 0;
@@ -69,7 +69,7 @@ void	ft_alloc_pts(t_data *data)
 		data->pts[i] = malloc((data->cols + 1) * sizeof(int));
 		if (!data->pts[i])
 			ft_clean_exit(data, "Error allocating space");
-		data->pts[i][data->cols + 1] = '\0';
+		data->pts[i][data->cols + 1] = -1;
 		i++;
 	}
 }
@@ -151,12 +151,26 @@ void	ft_map_size(char *map, t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data		*data;
+	int			i;
+	int			j;
 
+	i = 0;
 	data = (t_data *)malloc(sizeof(t_data *));
 	if (argc != 2)
 		return (errno = EINVAL, perror("Invalid Number of Arguments"), 1);
 	ft_map_size(argv[1], data);
 	ft_set_matrix(argv[1], data);
+	while (data->pts[i])
+	{
+		j = 0;
+		while(data->pts[i][j] != -1)
+		{
+			printf("%d", data->pts[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 	ft_clean_exit(data, NULL);
 	return (0);
 }
