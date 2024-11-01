@@ -6,14 +6,18 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/10/30 20:13:23 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/01 11:46:00 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
+#include "../inc/libft/inc/libft.h"
 
 void	ft_clean_exit(t_data *data, char *msg)
 {
+	int	i;
+	
+	i = 0;
 	if (data)
 	{
 		if (data->pts)
@@ -38,7 +42,7 @@ void	ft_count_cols(char *buff, t_data *data)
 	int			i;
 
 	i = 0;
-	split = ft_split(buff);
+	split = ft_split(buff, ' ');
 	if (!split)
 	{
 		free(buff);
@@ -64,10 +68,7 @@ void	ft_map_size(char *map, t_data *data)
 {
 	int		fd;
 	char	*buff;
-	char	**split;
-	int		cols;
 
-	cols = 0;
 	data->rows = 0;
 	fd = open(map, O_RDONLY, 0);
 	if (fd == -1)
@@ -92,7 +93,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (errno = EINVAL, perror("Invalid Number of Arguments"), 1);
 	ft_map_size(argv[1], data);
-	ft_set_matrix(argv[1], data);
 	ft_clean_exit(data, NULL);
 	return (0);
 }

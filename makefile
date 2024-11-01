@@ -29,6 +29,9 @@ clean:
 fclean: clean
 	rm -rf $(name)
 
+debug:
+	cc src/*.c -g -I inc inc/libft/libft.a -o debug
+
 re: fclean all
 
 PHONY: clean fclean re
