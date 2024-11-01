@@ -1,5 +1,7 @@
 NAME = fdf.a
-SRCFILES = main.c
+SRCFILES = main.c \
+			parse_map.c \
+			draw.c \
 SRCDIR = src
 OBJDIR = obj
 SRCS = $(addprefix $(SRCDIR)/, $(SRCFILES))

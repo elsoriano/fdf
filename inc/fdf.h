@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:51:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/10/30 19:18:24 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/01 19:25:57 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 
 typedef struct s_data
 {
-	int	cols;
-	int	rows;
-	int	**pts;
+	int		cols;
+	int		rows;
+	int		**pts;
+	void	*mlx_ses;
+	void	*mlx_win;
+	int		zoom;
 }
     t_data;
 
+void	ft_put_nb(char *line, int row, t_data *data);
+void	ft_alloc_pts(t_data *data);
+void	ft_set_matrix(char *map, t_data *data);
+void	ft_count_cols(char *buff, t_data *data);
+void	ft_map_size(char *map, t_data *data);
 
 #endif
