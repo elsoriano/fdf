@@ -6,13 +6,20 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/03 17:33:05 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/03 19:30:51 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 #include "../inc/libft/inc/libft.h"
 #include "../inc/minilibx-linux/mlx.h"
+
+int	ft_hook(int key, t_data *data)
+{
+	if (key == 65307)
+		ft_clean_exit(data, NULL);
+	return (0);
+}
 
 void	ft_clean_exit(t_data *data, char *msg)
 {
@@ -23,17 +30,18 @@ void	ft_clean_exit(t_data *data, char *msg)
 	{
 		if (data->pts)
 		{
-			while (data->pts[i])
+			while (i < data->rows)
 				free(data->pts[i++]);
 			free(data->pts);
 		}
+		free(data);
 	}
 	if (msg)
 	{
 		perror(msg);
 		exit(EXIT_FAILURE);
 	}
-	return;
+	exit(EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
@@ -46,7 +54,8 @@ int	main(int argc, char **argv)
 	ft_map_size(argv[1], data);
 	ft_set_matrix(argv[1], data);
 	ft_draw_map(data);
+	mlx_key_hook(data->mlx_win, ft_hook, data);
 	mlx_loop(data->mlx_ses);
-	ft_clean_exit(data, NULL);
+	//ft_clean_exit(data, NULL);
 	return (0);
 }
