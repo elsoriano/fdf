@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:55:33 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/03 15:51:15 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:30:55 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	ft_persp(float *x, float *y, t_data *data)
 {
 	int	z;
 
-	z = data->pts[(int)*y][(int)*x] / 10;
+	z = data->pts[(int)*y][(int)*x] / 2;
 	*x = (*x - *y)* cos(0.8);
 	*y = (*x + *y)* sin(0.8) - z;
 }
 
-void	ft_zoomove(float *x, float *y)
+void	ft_zoomove(float *x, float *y, t_data *data)
 {
 	float	move;
-	float	zoom;
+	float	zoom_x;
 	
-	zoom = 20;
-	*x *= zoom;
-	*y *= zoom;
-	move = 350;
+	zoom_x = 1000 / (data->cols + data->rows);
+	*x *= zoom_x;
+	*y *= zoom_x;
+	move = 400 * (data->cols / data->rows);
 	*x += move;
-	*y += move;
+	*y += 400;
 }
 
 void	ft_draw_line(float x, float y, float x1, float y1, t_data *data)
@@ -52,8 +52,8 @@ void	ft_draw_line(float x, float y, float x1, float y1, t_data *data)
 		color = 0xfffafa;
 	ft_persp(&x, &y, data);
 	ft_persp(&x1, &y1, data);
-	ft_zoomove(&x, &y);
-	ft_zoomove(&x1, &y1);
+	ft_zoomove(&x, &y, data);
+	ft_zoomove(&x1, &y1, data);
 	x_step = x1 - x;
 	y_step = y1 - y;
 	temp = MAX(MOD(x_step), MOD(y_step));
@@ -76,7 +76,7 @@ void	ft_draw_map(t_data *data)
 	x = 0;
 	y = 0;
 	data->mlx_ses = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx_ses, 1000, 1000, "FDF");
+	data->mlx_win = mlx_new_window(data->mlx_ses, 1000, 800, "FDF");
 	while (y < data->rows)
 	{
 		x = 0;
