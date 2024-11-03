@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 19:22:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/01 19:23:14 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:15:10 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	ft_alloc_pts(t_data *data)
 	int	i;
 
 	i = 0;
-	data->pts = (int **)malloc((data->rows + 1) * sizeof(int *));
+	data->pts = (int **)malloc(((data->rows) + 1) * sizeof(int *));
 	if (!data->pts)
 		ft_clean_exit(data, "Error allocating space");
 	data->pts[data->rows + 1] = NULL;
 	while (i < data->rows)
 	{
-		data->pts[i] = malloc((data->cols + 1) * sizeof(int));
+		data->pts[i] = malloc(((data->cols) + 1) * sizeof(int));
 		if (!data->pts[i])
 			ft_clean_exit(data, "Error allocating space");
 		data->pts[i][data->cols + 1] = -1;
