@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:55:33 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/03 18:30:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:23:01 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_zoomove(float *x, float *y, t_data *data)
 	float	move;
 	float	zoom_x;
 	
-	zoom_x = 1000 / (data->cols + data->rows);
+	zoom_x = 1000 / (1 * (data->cols + data->rows));
 	*x *= zoom_x;
 	*y *= zoom_x;
-	move = 400 * (data->cols / data->rows);
+	move = 400 + data->rows;
 	*x += move;
 	*y += 400;
 }
@@ -46,7 +46,7 @@ void	ft_draw_line(float x, float y, float x1, float y1, t_data *data)
 	float	temp;
 	int		color;
 
-	color = 0xcd5c5c;
+	color = 0xfffafa;
 	if (data->pts[(int)y1][(int)x1] \
 			|| data->pts[(int)y][(int)x])
 		color = 0xfffafa;
