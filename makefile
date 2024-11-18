@@ -32,7 +32,8 @@ fclean: clean
 	rm -rf $(name)
 
 debug:
-	gcc src/*.c -g -fsanitize=address -I inc inc/libft/libft.a inc/minilibx-linux/libmlx_Linux.a -lX11 -lXext -o debug
+	rm -rf debug.a
+	gcc src/*.c -g -fsanitize=address -I inc inc/libft/libft.a inc/minilibx-linux/libmlx_Linux.a -lX11 -lXext -lm -o debug.a
 
 re: fclean all
 

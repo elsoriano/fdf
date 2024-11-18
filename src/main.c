@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 13:58:49 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:21:34 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	main(int argc, char **argv)
 		return (errno = EINVAL, perror("Invalid Number of Arguments"), 1);
 	ft_map_size(argv[1], data);
 	ft_set_matrix(argv[1], data);
+	data->mlx_ses = mlx_init();
+	data->mlx_win = mlx_new_window(data->mlx_ses, 1000, 900, "FDF");
 	ft_draw_map(data);
 	mlx_key_hook(data->mlx_win, ft_hook, data);
 	mlx_hook(data->mlx_win, 17, 0, ft_close, NULL);
