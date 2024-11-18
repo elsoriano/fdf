@@ -15,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(MAKE) -C inc/libft
 	$(MAKE) -C inc/minilibx-linux
-	$(CC) $(CFLAGS) $(OBJS) inc/libft/libft.a inc/minilibx-linux/libmlx_Linux.a -lX11 -lXext -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) inc/libft/libft.a inc/minilibx-linux/libmlx_Linux.a -lX11 -lXext -lm -o $(NAME)
 
 $(OBJS): $(SRCS)
 

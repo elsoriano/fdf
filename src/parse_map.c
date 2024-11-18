@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 19:22:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/03 19:24:27 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:20:36 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	ft_put_nb(char *line, int row, t_data *data)
 	split = ft_split(line, ' ');
 	if (!split)
 		ft_clean_exit(data, "Error spliting line");
-	while(split[i] && i < data->cols)
+	while (split[i] && i < data->cols)
 	{
 		data->pts[row][i] = ft_atoi(split[i]);
 		i++;
 	}
 	i = 0;
-	while(split[i])
+	while (split[i])
 		free(split[i++]);
 	free(split);
 }
@@ -49,7 +49,6 @@ void	ft_alloc_pts(t_data *data)
 		i++;
 	}
 }
-		
 
 void	ft_set_matrix(char *map, t_data *data)
 {
@@ -71,7 +70,6 @@ void	ft_set_matrix(char *map, t_data *data)
 		row++;
 		free(line);
 	}
-	
 }
 
 void	ft_count_cols(char *buff, t_data *data)
@@ -115,8 +113,8 @@ void	ft_map_size(char *map, t_data *data)
 	while (1 == 1)
 	{
 		buff = ft_get_next_line(fd);
-		if(!buff)
-			break;
+		if (!buff)
+			break ;
 		ft_count_cols(buff, data);
 		free(buff);
 		data->rows++;
