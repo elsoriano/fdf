@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:55:33 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/12 09:23:01 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:02:00 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_persp(float *x, float *y, t_data *data)
 	int	z;
 
 	z = data->pts[(int)*y][(int)*x] / 2;
-	*x = (*x - *y)* cos(0.8);
-	*y = (*x + *y)* sin(0.8) - z;
+	*x = (*x - *y)* cos(0.7);
+	*y = (*x + *y)* sin(0.7) - z;
 }
 
 void	ft_zoomove(float *x, float *y, t_data *data)

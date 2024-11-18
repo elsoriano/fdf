@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:51:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/02 21:28:24 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:03:49 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_data
 	void	*mlx_ses;
 	void	*mlx_win;
 }
-    t_data;
+	t_data;
 
 void	ft_put_nb(char *line, int row, t_data *data);
 void	ft_alloc_pts(t_data *data);
