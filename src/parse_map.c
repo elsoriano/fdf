@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 19:22:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 14:20:36 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/18 21:36:24 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ void	ft_map_size(char *map, t_data *data)
 	data->rows = 0;
 	fd = open(map, O_RDONLY, 0);
 	if (fd == -1)
+	{
+		perror("Error Opening Map");
 		exit(EXIT_FAILURE);
+	}
 	while (1 == 1)
 	{
 		buff = ft_get_next_line(fd);
