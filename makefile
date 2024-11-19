@@ -1,4 +1,4 @@
-NAME = fdf.a
+NAME = fdf
 SRCFILES = main.c \
 			parse_map.c \
 			draw.c
@@ -26,10 +26,13 @@ obj:
 	mkdir -p $(OBJDIR)
 
 clean:
+	$(MAKE) -C inc/libft clean
+	$(MAKE) -C inc/minilibx-linux clean
 	rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -rf $(name)
+	$(MAKE) -C inc/libft fclean
+	rm -rf $(NAME)
 
 debug:
 	rm -rf debug.a
