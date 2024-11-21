@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/21 19:47:40 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:51:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/libft/inc/libft.h"
 #include "../inc/minilibx-linux/mlx.h"
 
-void ft_clean_data(t_data *data, char *msg)
+void	ft_clean_data(t_data *data, char *msg)
 {
 	free (data);
 	perror (msg);
