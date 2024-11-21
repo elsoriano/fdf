@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:55:33 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 21:23:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:47:09 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_draw_line(t_iso pt1, t_iso pt2, t_data *data)
 	{
 		if (mlx_pixel_put(data->mlx_ses, data->mlx_win, \
 				(int)pt1.x, (int)pt1.y, 0xfffafa) == -1)
-			ft_clean_exit(data, "Error putting pixel");
+			ft_clean_pts(data, "Error putting pixel");
 		pt1.x += x_step;
 		pt1.y += y_step;
 	}

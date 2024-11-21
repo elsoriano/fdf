@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 19:22:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 21:36:24 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:46:44 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_put_nb(char *line, int row, t_data *data)
 	i = 0;
 	split = ft_split(line, ' ');
 	if (!split)
-		ft_clean_exit(data, "Error spliting line");
+		ft_clean_pts(data, "Error spliting line");
 	while (split[i] && i < data->cols)
 	{
 		data->pts[row][i] = ft_atoi(split[i]);
@@ -40,12 +40,16 @@ void	ft_alloc_pts(t_data *data)
 	i = 0;
 	data->pts = (int **)malloc(((data->rows)) * sizeof(int *));
 	if (!data->pts)
-		ft_clean_exit(data, "Error allocating space");
+	{
+		free (data);
+		perror("Error allocating space");
+		exit(EXIT_FAILURE);
+	}
 	while (i < data->rows)
 	{
 		data->pts[i] = malloc((data->cols) * sizeof(int));
 		if (!data->pts[i])
-			ft_clean_exit(data, "Error allocating space");
+			ft_clean_pts(data, "Error allocating space");
 		i++;
 	}
 }
@@ -59,12 +63,12 @@ void	ft_set_matrix(char *map, t_data *data)
 	ft_alloc_pts(data);
 	fd = open(map, O_RDONLY);
 	if (!fd)
-		ft_clean_exit(data, "Error opening map");
+		ft_clean_pts(data, "Error opening map");
 	row = 0;
 	while (1)
 	{
 		line = ft_get_next_line(fd);
-		if (!line)
+		if (!line || line[0] == '\n')
 			break ;
 		ft_put_nb(line, row, data);
 		row++;
@@ -75,7 +79,6 @@ void	ft_set_matrix(char *map, t_data *data)
 void	ft_count_cols(char *buff, t_data *data)
 {
 	char		**split;
-	static int	cols = -1;
 	int			i;
 
 	i = 0;
@@ -83,16 +86,17 @@ void	ft_count_cols(char *buff, t_data *data)
 	if (!split)
 	{
 		free(buff);
-		ft_clean_exit(data, "Error reading rows");
+		ft_clean_data(data, "Error splitting rows");
 	}
 	while (split[i])
 		i++;
-	if (cols != i && cols != -1)
+	if (data->cols != i && data->cols != -1)
 	{
+		i = 0;
 		while (split[i])
 			free(split[i++]);
 		free(split);
-		ft_clean_exit(data, "Lines have different sizes");
+		ft_clean_data(data, "Lines have different size");
 	}
 	data->cols = i;
 	i = 0;
@@ -107,6 +111,7 @@ void	ft_map_size(char *map, t_data *data)
 	char	*buff;
 
 	data->rows = 0;
+	data->cols = -1;
 	fd = open(map, O_RDONLY, 0);
 	if (fd == -1)
 	{

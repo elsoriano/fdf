@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:51:28 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 21:07:53 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:46:47 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_count_cols(char *buff, t_data *data);
 void	ft_map_size(char *map, t_data *data);
 void	ft_draw_line(t_iso x, t_iso y, t_data *data);
 void	ft_draw_map(t_data *data);
-void	ft_clean_exit(t_data *data, char *msg);
+void	ft_clean_pts(t_data *data, char *msg);
+void	ft_clean_data(t_data *data, char *msg);
 
 #endif

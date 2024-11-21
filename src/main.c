@@ -6,13 +6,20 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/18 21:21:34 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:47:40 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 #include "../inc/libft/inc/libft.h"
 #include "../inc/minilibx-linux/mlx.h"
+
+void ft_clean_data(t_data *data, char *msg)
+{
+	free (data);
+	perror (msg);
+	exit (EXIT_FAILURE);
+}
 
 int	ft_close(int event)
 {
@@ -24,23 +31,20 @@ int	ft_close(int event)
 int	ft_hook(int key, t_data *data)
 {
 	if (key == 65307 || key == 64)
-		ft_clean_exit(data, NULL);
+		ft_clean_pts(data, NULL);
 	return (0);
 }
 
-void	ft_clean_exit(t_data *data, char *msg)
+void	ft_clean_pts(t_data *data, char *msg)
 {
 	int	i;
 
 	i = 0;
 	if (data)
 	{
-		if (data->pts)
-		{
-			while (i < data->rows)
-				free(data->pts[i++]);
-			free(data->pts);
-		}
+		while (i < data->rows)
+			free(data->pts[i++]);
+		free(data->pts);
 		free(data);
 	}
 	if (msg)
