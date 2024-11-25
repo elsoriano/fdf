@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:27 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/21 19:51:18 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:22:38 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	main(int argc, char **argv)
 {
 	t_data		*data;
 
-	data = (t_data *)malloc(sizeof(t_data));
 	if (argc != 2)
 		return (errno = EINVAL, perror("Invalid Number of Arguments"), 1);
+	data = (t_data *)malloc(sizeof(t_data));
 	ft_map_size(argv[1], data);
 	ft_set_matrix(argv[1], data);
 	data->mlx_ses = mlx_init();

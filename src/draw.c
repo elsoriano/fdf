@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:55:33 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/21 19:47:09 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:16:59 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_iso	ft_persp(float x, float y, t_data *data)
 	float	move;
 	float	zoom;
 
-	z = data->pts[(int)y][(int)x] / 2;
+	z = data->pts[(int)y][(int)x];
 	pt.x = (x - y) * cos(0.6);
 	pt.y = (x + y) * sin(0.6) - z;
 	zoom = 1000 / (1 * (data->cols + data->rows));
